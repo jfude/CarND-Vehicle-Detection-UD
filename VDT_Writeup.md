@@ -212,8 +212,7 @@ False Detect 2             |  False Detect 2 Heat Map
 
 
 
-Note the real detection of the car on the right is much warmer than the false detection on the left. The false detection
-is removed via thresholding. We used a double ended queue for combining heat maps from consecutive frames 
+Note the real detection of the car on the right in the heat map image is much warmer than the false detection on the left. The false detection is removed via thresholding. We used a double ended queue for combining heat maps from consecutive frames 
 
 ```python
 # Initialize 
@@ -230,7 +229,7 @@ q_heat_map = collections.deque(np.array((720,1280), dtype='int32')  ,qSize)
 
        # Update heat map for this frame
         heat_map[xleft:xleft1,ytop:ytop1] += 1
-
+   # end window loop
 
     # Update q_heat_map and sum                                                                              
     np.copyto(first_heat_map,q_heat_map[0])
@@ -252,9 +251,9 @@ labels = label(current_heat_map)
 final_img = draw_labeled_bboxes(np.copy(img_orig), labels)
 ```
 
-where img_orig is the original image. 
+where img_orig is the original image. The label function identifies areas of contiguous pixels that have non-zero strength and attaches a label to each such area. The draw_labeled_bboxes() function uses these labels to identify and draw a bounding box around each area.  
 
-The final image corresponding to the false positive 2 image and heat map above, with bounding boxes draw around vehicles 
+The final image corresponding to the false detect 2 image and heat map above, with bounding boxes draw around vehicles 
 is shown below.
 
 [][final_bbox_img]
@@ -262,7 +261,7 @@ is shown below.
 ## Output Video
 
 The output video produced by the above steps implemented in veh_detect.py and run against ./project_video.mp4
-is ./project_output.sv3. I also provided this video convert to Quicktime format, ./project_output.mov.
+is ./project_output.sv3. I also provided this video converted to Quicktime format, ./project_output.mov.
 
 
 ## Discussion
