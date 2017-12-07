@@ -95,7 +95,8 @@ This function is called from the get_hog_features.
 def get_hog_features(img, orient, pix_per_cell, cell_per_block, vis=False, feature_vec=True):
 ```
 
-Initially running again the small test image set, I found that extracting all color channels and a higher number of orientations (12 rather than the default of 9)  gave higher accuracy scores. Blocks are normalized using the L2 clip and renomalize approach, block_norm='L2-Hys'.   I did not get a better result by increasing the number cells per block, or block size. 
+Initially running again the small test image set, I found that extracting all color channels and a higher number of orientations (12 rather than the default of 9)  gave higher accuracy scores. (I dropped back to 9 for the final video
+due to finding a higher number of false detections.  Perhaps these could have been filtered with a higher threshold. See below.) Blocks are normalized using the L2 clip and renomalize approach, block_norm='L2-Hys'.   I did not get a better result by increasing the number cells per block, or block size. 
 
 The returned HOG feature vectors for each color channel are concatenated together and this result is further
 concatenated with the aforementioned color feature vectors to produce the final feature vector. Once feature vectors for all images were extracted, they were normalized using
