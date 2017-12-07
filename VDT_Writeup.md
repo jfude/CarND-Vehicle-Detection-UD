@@ -15,6 +15,7 @@ a self-driving car. The processing steps that are covered in this project are th
 [clean_det1_img]: ./examples/clean_detect1.png
 [clean_det2_img]: ./examples/clean_detect2.png
 [clean_det3_img]: ./examples/clean_detect3.png
+[clean_det4_img]: ./examples/clean_detect4.png
 [false_pos1_img]: ./examples/false_pos1.png
 [false_pos2_img]: ./examples/false_pos2.png
 [false_pos2_heat_img]: ./examples/false_pos2_heat.png
@@ -180,27 +181,39 @@ In many frames of the project video, the above method does a pretty good job at 
 including detecting cars on the opposite side of the median. Detecting windows are shown below in red.
 
 
-![Clean Detection 1][clean_det1_img]
-![Clean Detection 2][clean_det2_img]
-![Clean Detection 3][clean_det3_img]
+![Clean Detection 1][clean_det1_img]  ![Clean Detection 2][clean_det2_img]
+
+
+Clean Detect 1             |  Clean Detect 2
+:-------------------------:|:-------------------------:
+![][clean_det1_img]        |  ![][clean_det2_img]
+
+Clean Detect 3             |  Clean Detect 4
+:-------------------------:|:-------------------------:
+![][clean_det3_img]        |  ![][clean_det4_img]
+
 
 
 In a number of frames however, false positive detections appear. 
 
-![False Detection 1][false_pos1_img]
-![False Detection 2][false_pos2_img]
+False Detect 1             |  False Detect 2
+:-------------------------:|:-------------------------:
+![][false_pos1_img]        |  ![][false_pos2_img]
 
 
-To remove false positives, a heat map is constructed by combining detections from a number of consecutive frames, and thresholding areas with multiple detections. The heat map for false positive image 2 is shown here in gray scale 
 
-![False Detection 2_Heat][false_pos2_heat_img]
+To remove false positives, a heat map is constructed by combining detections from a number of consecutive frames, and thresholding areas with multiple detections. The heat map for false detect image 2 is shown here in gray scale 
 
-Note the real detection of the car on the right is much warmer than the false detection on the left. 
+False Detect 2             |  False Detect 2 Heat Map
+:-------------------------:|:-------------------------:
+![][false_pos2_img]        |  ![][false_pos2_heat_img]
 
 
-We used a double ended queue for combining heat maps from consecutive frames 
 
- 
+
+Note the real detection of the car on the right is much warmer than the false detection on the left. The false detection
+is removed via thresholding. We used a double ended queue for combining heat maps from consecutive frames 
+
 ```python
 # Initialize 
 heat_thresh = 10 
@@ -244,11 +257,11 @@ The final image corresponding to the false positive 2 image and heat map above, 
 is shown below.
 
 
-
 ## Output Video
 
 The output video produced by the above steps implemented in veh_detect.py and run against ./project_video.mp4
 is ./project_output.sv3. I also provided this video convert to Quicktime format, ./project_output.mov.
+
 
 ## Discussion
 
@@ -259,7 +272,7 @@ probably define a variable final_size_p (initial_size_p is a parameter), the fin
 For each frame, though the window search is performed over the bottom half of each video frame, I actually calculate
 the features over the whole frame. This is unnecessary and then performance could be improved by calculating over a cropped image. 
 
-In addition, it have been interesting to try to improve the classifier, e.g. considering a nonclassifier, optimizing parameters using GridSearchCV, and augmenting the data set with Udacity data.
+In addition, it would have been interesting to try to improve the classifier, e.g. considering a nonlinear classifier, optimizing parameters using GridSearchCV, and augmenting the data set with Udacity data.
 
 
 
