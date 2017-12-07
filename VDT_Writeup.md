@@ -19,6 +19,7 @@ a self-driving car. The processing steps that are covered in this project are th
 [false_pos1_img]: ./examples/false_pos1.png
 [false_pos2_img]: ./examples/false_pos2.png
 [false_pos2_heat_img]: ./examples/false_pos2_heat.png
+[final_bbox_img]: ./examples/final_bbox.png
 [video1]: ./project_video.mp4
 
 ## Rubric Points  Points
@@ -181,7 +182,7 @@ In many frames of the project video, the above method does a pretty good job at 
 including detecting cars on the opposite side of the median. Detecting windows are shown below in red.
 
 
-![Clean Detection 1][clean_det1_img]  ![Clean Detection 2][clean_det2_img]
+
 
 
 Clean Detect 1             |  Clean Detect 2
@@ -256,6 +257,7 @@ where img_orig is the original image.
 The final image corresponding to the false positive 2 image and heat map above, with bounding boxes draw around vehicles 
 is shown below.
 
+[][final_bbox_img]
 
 ## Output Video
 
