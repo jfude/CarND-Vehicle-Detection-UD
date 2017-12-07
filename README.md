@@ -8,8 +8,8 @@ Udacity CarND-Vehicle-Detection-Project
 This repository contains the completed CarND-Vehicle-Detection-Project, which demonstrates
 the use of Support Vector Machine classification to detect cars and distinguish them from other
 features on the road. Both color and gradient features are used for training the classifier. 
-A window search is then applied to each frame image taken by the camera. The classifier make a 
-prediction in each window and false positives are removed by accepting on positive detections 
+A window search is then applied to each frame image taken by the camera. The classifier makes a 
+prediction in each window and false positives are removed by accepting only positive detections 
 in the same region in multiple consecutive frames. 
 
 The primary output of the project is the code veh_detect.py which loads the project video,
@@ -19,8 +19,6 @@ has been uploaded as 'project_output_final.sv3' (sv3 is the orginal format)  and
 (converted format).
 
 
-
-## List of Files
 ## List of Files
 - README.md          -- this file.
 - VHD_WriteUp.md     -- Description (with examples) of techniques used in this project and final project
@@ -34,7 +32,7 @@ SV3 format).
   		      performs vehicle detection on each frame, and outputs the video with bounding boxes
 		      around vehicles detected.
  
-- ./project_images/ -- Directory of images used in the write up for explaining the various stages of preocessing..
+- ./examples/ -- Directory of images used in the write up for illustrating some stages of processing.
 
 
 
@@ -160,24 +158,3 @@ widgetsnbextension        1.2.3                    py35_1    menpo
 xz                        5.2.3                         0    conda-forge
 zeromq                    4.2.1                         1    conda-forge
 zlib                      1.2.8                         3    conda-forge
-
-
-
-
-
-
-The Project
----
-
-The goals / steps of this project are the following:
-
-* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
-* Estimate a bounding box for vehicles detected.
-
-Here are links to the labeled data for [vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip) and [non-vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip) examples to train your classifier.  These example images come from a combination of the [GTI vehicle image database](http://www.gti.ssr.upm.es/data/Vehicle_database.html), the [KITTI vision benchmark suite](http://www.cvlibs.net/datasets/kitti/), and examples extracted from the project video itself.   You are welcome and encouraged to take advantage of the recently released [Udacity labeled dataset](https://github.com/udacity/self-driving-car/tree/master/annotations) to augment your training data.  
-
-
