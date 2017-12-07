@@ -81,7 +81,7 @@ which can be passed the number of bins and the bin range. The bin range should
 be set appropriately for the underlying pixel type of the input range (typically pixels are scaled from 0 to 255 or 0 to 1. All three histograms are then concatenated together to produce a single color histogram feature vector. 
 
 In order to select a good color space and appropriate parameters for these methods, we extracted features on the provided
-small test set of vehicle and non-vehicle images, split the images into train and test sets, trained a linear SVC classifier, and compared accuracy scores for various parameter values. The two best color spaces were found to be 'YCrCb' and 'LUV', giving scores in the 90 and above percentile range, where as other choices produced scores in the high 80s or less. A resolution of 16x16 for the spatial feature and 48 bins for the color histogram feature produced the best results. Later however,  when running against the project video it was found that reducing resolution to 16x16 produced too many false positive detections, so I returned to 32x32.   
+small test set of vehicle and non-vehicle images, split the images into train and test sets, trained a linear SVC classifier, and compared accuracy scores for various parameter values. The two best color spaces were found to be 'YCrCb' and 'LUV', giving scores in the 90 and above percentile range, where as other choices produced scores in the high 80s or less. In the end I settled on 'YCrCb'. A resolution of 16x16 for the spatial feature and 48 bins for the color histogram feature produced the best results. Later however,  when running against the project video it was found that reducing resolution to 16x16 produced too many false positive detections, so I returned to 32x32.   
 
 
 ### HOG Features
@@ -89,7 +89,9 @@ small test set of vehicle and non-vehicle images, split the images into train an
 For spatial gradient characteristics, I used the HOG (Histogram of Gradients) function from skimage.feature library.
 This function is called from the get_hog_features.
 
+```python
 def get_hog_features(img, orient, pix_per_cell, cell_per_block, vis=False, feature_vec=True):
+```
 
 Initially running again the small test image set, I found that extracting all color channels and a higher number of orientations (12 rather than the default of 9)  gave higher accuracy scores. Blocks are normalized using the L2 clip and renomalize approach, block_norm='L2-Hys'.   I did not get a better result by increasing the number cells per block, or block size. 
 
@@ -155,7 +157,7 @@ def sliding_windows(xlimit_p,ylimit_p,initial_size_p,num_yoverlap,size_frac,vert
 
 
 This function creates a set of windows which are the same size at the same x (vertical) level in the image
-but get progressively smaller as we move upward (smaller y values) in the image. This make sense as vehicles that are lower in the image (near the bottom, not near the horizon), will not be as small as those on the horizon. All windows are square and there coordinates are returned in terms of cells, not pixels. 
+but get progressively smaller as we move upward (smaller y values) in the image. This make sense as vehicles that are lower in the image (near the bottom, not near the horizon), will not be as small as those on the horizon. All windows are square and window coordinates are returned in terms of cells, not pixels. 
 
 The input parameters are
 ```python
@@ -175,7 +177,7 @@ where "size" here refers to the side edge of a square window. Window sizes chang
 ## Detection Reliability
 
 In many frames of the project video, the above method does a pretty good job at detecting cars,
-including detecting cars on the opposite side of the median.
+including detecting cars on the opposite side of the median. Detecting windows are shown below in red.
 
 
 ![Clean Detection 1][clean_det1_img]
@@ -187,7 +189,6 @@ In a number of frames however, false positive detections appear.
 
 ![False Detection 1][false_pos1_img]
 ![False Detection 2][false_pos2_img]
-
 
 
 To remove false positives, a heat map is constructed by combining detections from a number of consecutive frames, and thresholding areas with multiple detections. The heat map for false positive image 2 is shown here in gray scale 
