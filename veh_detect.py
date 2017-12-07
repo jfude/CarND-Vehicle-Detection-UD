@@ -361,7 +361,7 @@ if __name__ == "__main__":
     ## Booleans so that previously calculated feature vectors or 
     ## previously trained may be quickly pulled from pickle file
     loadFeat = False
-    loadSVC  = True
+    loadSVC  = False
 
     svc,X_scaler = get_classifier(loadFeat,loadSVC,colorspace,orient,pix_per_cell,
                                   cell_per_block,hog_channel,spatial,histbins)
@@ -370,7 +370,7 @@ if __name__ == "__main__":
 
     ####### Initialize deque for heat map   #################
     ## qSize Length of deque
-    qSize = 6
+    qSize = 5
     q_heat_map = collections.deque(np.array((720,1280), dtype='int32'),qSize)
     
     #  Blank heat map
