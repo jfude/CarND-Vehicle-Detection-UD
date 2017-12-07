@@ -256,7 +256,7 @@ where img_orig is the original image. The label function identifies areas of con
 The final image corresponding to the false detect 2 image and heat map above, with bounding boxes draw around vehicles 
 is shown below.
 
-[][final_bbox_img]
+![][final_bbox_img]
 
 ## Output Video
 
